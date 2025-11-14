@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Privacy Scanner - AI-Powered Sensitive Information Detection</title>
+    <meta name="description" content="Automatically detect and protect sensitive information in documents using AI. Upload PAN cards, Aadhaar, tickets, bills and get privacy-protected versions instantly.">
+    <meta name="author" content="Document Privacy Scanner">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Document Privacy Scanner - AI-Powered Privacy Protection">
+    <meta property="og:description" content="Automatically detect and protect sensitive information in documents using AI. Upload PAN cards, Aadhaar, tickets, bills and get privacy-protected versions instantly.">
+    <meta property="og:type" content="website">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Your custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="shield"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Document Privacy Scanner</h1>
+                        <p>AI-powered sensitive information detection and protection</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Upload Section -->
+        <section id="upload-section" class="upload-section">
+            <!-- Features -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="file-text"></i>
+                    </div>
+                    <h3>Smart Detection</h3>
+                    <p>Automatically identifies PAN cards, Aadhaar, tickets, bills and other sensitive documents</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield"></i>
+                    </div>
+                    <h3>Privacy Protection</h3>
+                    <p>Automatically blurs sensitive information to protect your privacy</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3>Instant Results</h3>
+                    <p>Get AI-powered analysis and protected images in seconds</p>
+                </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- Upload Area -->
+            <div class="upload-content">
+                <div class="upload-header">
+                    <h2>Upload Your Document</h2>
+                    <p>Select an image to scan for sensitive information</p>
+                </div>
+
+                <!-- Upload Zone -->
+                <div id="upload-zone" class="upload-zone">
+                    <div class="upload-zone-content">
+                        <div id="upload-icon" class="upload-icon">
+                            <i data-lucide="upload"></i>
+                        </div>
+                        
+                        <div class="upload-text">
+                            <h3 id="upload-title">Upload an image</h3>
+                            <p id="upload-description">Drag and drop or click to select your PAN, Aadhaar, ticket, bill, or any document</p>
+                            <p class="upload-formats">Supports JPEG, PNG, WebP • Max 10MB</p>
+                        </div>
+
+                        <button id="choose-file-btn" class="btn btn-upload">
+                            <i data-lucide="upload"></i>
+                            Choose File
+                        </button>
+                    </div>
+
+                    <input type="file" id="file-input" accept="image/jpeg,image/jpg,image/png,image/webp" style="display: none;">
+                </div>
+
+                <!-- Image Preview -->
+                <div id="image-preview" class="image-preview" style="display: none;">
+                    <div class="preview-image-container">
+                        <img id="preview-img" alt="Selected image preview">
+                        <button id="clear-image-btn" class="btn btn-clear">
+                            <i data-lucide="x"></i>
+                        </button>
+                    </div>
+                    <div class="preview-info">
+                        <div class="file-info">
+                            <i data-lucide="file-image"></i>
+                            <span id="file-name"></span>
+                            <span id="file-size"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Button -->
+                <div id="process-section" class="process-section" style="display: none;">
+                    <button id="process-btn" class="btn btn-process">
+                        <i data-lucide="shield"></i>
+                        Process Document
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Processing Status -->
+        <section id="processing-section" class="processing-section" style="display: none;">
+            <div class="processing-card">
+                <div class="processing-content">
+                    <div class="processing-spinner">
+                        <div class="spinner">
+                            <i data-lucide="loader-2"></i>
+                        </div>
+                        <div id="processing-step-icon" class="step-icon">
+                            <i data-lucide="image"></i>
+                        </div>
+                    </div>
+
+                    <div class="processing-text">
+                        <h3>Processing Your Image</h3>
+                        <p id="processing-description">Reading document content</p>
+                    </div>
+
+                    <div class="processing-steps">
+                        <div class="step active" data-step="0">
+                            <div class="step-icon-small">
+                                <i data-lucide="image"></i>
+                            </div>
+                            <span>Analyzing image</span>
+                        </div>
+                        <div class="step" data-step="1">
+                            <div class="step-icon-small">
+                                <i data-lucide="brain"></i>
+                            </div>
+                            <span>AI processing</span>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-icon-small">
+                                <i data-lucide="shield"></i>
+                            </div>
+                            <span>Applying protection</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section" style="display: none;">
+            <div class="results-header">
+                <button id="start-over-btn" class="btn btn-outline">
+                    <i data-lucide="arrow-left"></i>
+                    Process Another Document
+                </button>
+                <div class="results-title">
+                    <h2>Processing Complete</h2>
+                    <p>Your document has been analyzed and protected</p>
+                </div>
+            </div>
+
+            <!-- Classification Result -->
+            <div class="result-card">
+                <div class="result-header">
+                    <div id="classification-icon" class="classification-icon">
+                        <i data-lucide="alert-triangle"></i>
+                    </div>
+                    
+                    <div class="classification-content">
+                        <div class="classification-title">
+                            <h3>Classification Result</h3>
+                            <span id="classification-badge" class="badge badge-destructive">Sensitive</span>
+                        </div>
+                        
+                        <p id="classification-description">
+                            This document contains sensitive information and has been automatically blurred for privacy protection.
+                        </p>
+                        
+                        <div id="confidence-display" class="confidence">
+                            <i data-lucide="shield"></i>
+                            <span>Confidence: <span id="confidence-value">85</span>%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processed Image -->
+            <div class="processed-image-card">
+                <div class="processed-image-container">
+                    <img id="processed-img" alt="Processed document">
+                    <div id="sensitive-overlay" class="sensitive-overlay" style="display: none;">
+                        <span class="sensitive-badge">
+                            <i data-lucide="shield"></i>
+                            Sensitive Content Blurred
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="processed-image-footer">
+                    <div class="processed-image-info">
+                        <h4>Processed Image</h4>
+                        <p id="processed-status">Privacy protected</p>
+                    </div>
+                    
+                    <button id="download-btn" class="btn btn-download">
+                        <i data-lucide="download"></i>
+                        Download
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Powered by AI • Your privacy is our priority • Documents are processed securely</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" style="display: none;">
+        <div class="toast-content">
+            <div class="toast-icon">
+                <i data-lucide="check-circle"></i>
+            </div>
+            <div class="toast-text">
+                <div class="toast-title"></div>
+                <div class="toast-description"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
